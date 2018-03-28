@@ -1,0 +1,4 @@
+<launch>
+  <node name="astra_camera" pkg="astra_camera_pkg" type="opencv2.py" />
+  <node name="kobuki_position" pkg="astra_camera_pkg" type="move.py" />
+</launch>
