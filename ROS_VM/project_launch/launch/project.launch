@@ -1,0 +1,21 @@
+<launch>
+
+	<arg name="gui" default="false"/>
+	<param name="pport" value="$(arg pport)"/>
+	<param name="pip" value="$(arg pip)"/>
+	<param name="robot/name" value="NaoH25V50"/>
+	<param name="robot_description" textfile="$(find nao_description)/urdf/naoV50_generated_urdf/nao.urdf"/>
+
+
+
+	<node name="nao_listen_joints" pkg="nao_pkg" type="nao_listen_joints.py"/>
+	<node name="nao_listen_movement" pkg="nao_pkg" type="nao_listen_movement.py"/>
+	<node name="movement_publisher" pkg="nao_pkg" type="movement_publisher.py"/>
+
+
+   <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
+	<param name="port" value="9090"/>
+   </include>
+	
+   <node name="file_server" pkg="file_server" type="file_server" output="screen"/>
+</launch>
